@@ -10,7 +10,6 @@ const Header = () => {
                 <img className='mx-auto' src={logo} alt="" />
                 <p>Journalism Without Fear or Favour</p>
                 <p>{date}</p>
-
             </div>
         </div>
     );

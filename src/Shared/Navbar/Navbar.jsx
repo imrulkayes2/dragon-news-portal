@@ -13,7 +13,6 @@ const Navbar = () => {
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
-
             </div>
             <div className="navbar-center lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -22,7 +21,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 <img className='h-12 mr-2' src={userPic} alt="" />
-                <Link className='btn'>Login</Link>
+                <NavLink to='/login' className='btn'>Login</NavLink>
             </div>
         </div>
     );
