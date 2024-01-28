@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../Shared/Navbar/Navbar';
+import { AuthContext } from '../../Firebase/Providers/AuthProvider';
+import auth from '../../Firebase/Firebase.config';
 
 const Register = () => {
+    const { createUser } = useContext(AuthContext);
     const handleRegister = e => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
-        console.log(form.get('email'));
-        console.log(form.get('password'));
-        console.log(form.get('name'));
+        const email = form.get('email');
+        const password = form.get('password');
+        console.log(email, password);
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
     }
     return (
         <div>
