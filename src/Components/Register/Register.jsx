@@ -1,20 +1,23 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../Shared/Navbar/Navbar';
 import { AuthContext } from '../../Firebase/Providers/AuthProvider';
 import auth from '../../Firebase/Firebase.config';
 
 const Register = () => {
     const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
     const handleRegister = e => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
+        const name = form.get('name');
         const email = form.get('email');
         const password = form.get('password');
-        console.log(email, password);
+        console.log(name, email, password);
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
+                navigate('/login')
             })
             .catch(error => {
                 console.log(error.message);

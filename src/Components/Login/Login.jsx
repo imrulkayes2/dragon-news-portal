@@ -1,12 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../Shared/Navbar/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../../Firebase/Providers/AuthProvider";
 
 const Login = () => {
+    const { logIn } = useContext(AuthContext);
+    const navigate = useNavigate();
     const handleLogin = e => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
-        console.log(form.get('email'));
-        console.log(form.get('password'));
+        const email = form.get('email');
+        const password = form.get('password');
+        console.log(email, password);
+        logIn(email, password)
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+        navigate('/');
     }
 
     return (
