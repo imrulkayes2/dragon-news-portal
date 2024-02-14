@@ -1,10 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../Shared/Navbar/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../Firebase/Providers/AuthProvider";
 
 const Login = () => {
     const { logIn } = useContext(AuthContext);
+    const location = useLocation();
+    console.log(location);
     const navigate = useNavigate();
     const handleLogin = e => {
         e.preventDefault();
@@ -15,11 +17,13 @@ const Login = () => {
         logIn(email, password)
             .then(result => {
                 console.log(result.user);
+                // Navigate after login
+                navigate(location?.state? location.state : '/')
             })
             .catch(error => {
                 console.log(error.message);
             })
-        navigate('/');
+
     }
 
     return (
